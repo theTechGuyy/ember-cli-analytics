@@ -1,0 +1,68 @@
+<!DOCTYPE html><html lang="en"><head><title>services/analytics</title></head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content="../"><meta name="groc-document-path" content="services/analytics"><meta name="groc-project-path" content="addon/services/analytics.js"><meta name="groc-github-url" content="https://github.com/tomasbasham/ember-cli-analytics"><link rel="stylesheet" type="text/css" media="all" href="../assets/style.css"><script type="text/javascript" src="../assets/behavior.js"></script><body><div id="meta"><div class="file-path"><a href="https://github.com/tomasbasham/ember-cli-analytics/blob/master/addon/services/analytics.js">addon/services/analytics.js</a></div></div><div id="document"><div class="segment"><div class="code"><div class="wrapper"><span class="hljs-keyword">import</span> Ember <span class="hljs-keyword">from</span> <span class="hljs-string">'ember'</span>;
+<span class="hljs-keyword">import</span> Adaptable <span class="hljs-keyword">from</span> <span class="hljs-string">'ember-cli-adapter-pattern/mixins/adaptable'</span>;
+<span class="hljs-keyword">import</span> proxyToAdapter <span class="hljs-keyword">from</span> <span class="hljs-string">'ember-cli-adapter-pattern/utils/proxy-to-adapter'</span>;
+<span class="hljs-keyword">import</span> getOwner <span class="hljs-keyword">from</span> <span class="hljs-string">'ember-getowner-polyfill'</span>;
+
+<span class="hljs-keyword">const</span> {
+  assert,
+  get,
+  getWithDefault,
+  on,
+  set
+} = Ember;
+
+<span class="hljs-keyword">const</span> {
+  dasherize
+} = Ember.String;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> Ember.Service.extend(Adaptable, {</div></div></div><div class="segment"><div class="comments doc-section"><div class="wrapper"><p><span class='doc-section-header'>Method trackPage</span></p>
+<p>Send the current page URL to
+the analytics engine.</p></div></div><div class="code"><div class="wrapper">  trackPage: proxyToAdapter(<span class="hljs-string">'trackPage'</span>),</div></div></div><div class="segment"><div class="comments doc-section"><div class="wrapper"><p><span class='doc-section-header'>Method trackEvent</span></p>
+<p>Send an arbitrary event to the
+anlytics engine.</p></div></div><div class="code"><div class="wrapper">  trackEvent: proxyToAdapter(<span class="hljs-string">'trackEvent'</span>),</div></div></div><div class="segment"><div class="comments doc-section"><div class="wrapper"><p><span class='doc-section-header'>Method trackConversion</span></p>
+<p>Send a conversion completion
+event to the analytics engine.</p></div></div><div class="code"><div class="wrapper">  trackConversion: proxyToAdapter(<span class="hljs-string">'trackConversion'</span>),</div></div></div><div class="segment"><div class="comments doc-section"><div class="wrapper"><p><span class='doc-section-header'>Method identity</span></p>
+<p>Identify an anonymous user with a
+unique ID. This is useful when a
+user returns to the application
+an we wish to further track them.</p>
+<p>This should not be called in
+conjunction with alias.</p></div></div><div class="code"><div class="wrapper">  identify: proxyToAdapter(<span class="hljs-string">'identify'</span>),</div></div></div><div class="segment"><div class="comments doc-section"><div class="wrapper"><p><span class='doc-section-header'>Method identify</span></p>
+<p>For those platforms that support
+it, map an anonymous user id to a
+registered user. This is useful
+when you wish to associate events
+made before the user registerd
+with a newly created user account.</p></div></div><div class="code"><div class="wrapper">  alias: proxyToAdapter(<span class="hljs-string">'alias'</span>),</div></div></div><div class="segment"><div class="comments doc-section"><div class="wrapper"><p><span class='doc-section-header'>Method createAdapters on init</span></p>
+<p>Fetch the adapter configuation and
+ensure that we have a clean cache
+of adapters.</p>
+<p>Further to this we register our
+adapter classes with the option
+to not instatiate them immediately.</p></div></div><div class="code"><div class="wrapper">  createAdapters: on(<span class="hljs-string">'init'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">const</span> adapters = getWithDefault(<span class="hljs-keyword">this</span>, <span class="hljs-string">'config.analytics.integrations'</span>, Ember.A());
+    <span class="hljs-keyword">const</span> owner = getOwner(<span class="hljs-keyword">this</span>);</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Integrations should not be instantiated.</p></div></div><div class="code"><div class="wrapper">    owner.registerOptionsForType(<span class="hljs-string">'ember-cli-analytics@integration'</span>, { instantiate: <span class="hljs-literal">false</span> });
+    owner.registerOptionsForType(<span class="hljs-string">'integration'</span>, { instantiate: <span class="hljs-literal">false</span> });
+
+    set(<span class="hljs-keyword">this</span>, <span class="hljs-string">'_adapters'</span>, {});
+    set(<span class="hljs-keyword">this</span>, <span class="hljs-string">'context'</span>, {});
+
+    <span class="hljs-keyword">this</span>.activateAdapters(adapters);
+  }),</div></div></div><div class="segment"><div class="comments doc-section"><div class="wrapper"><p><span class='doc-section-header'>Method lookupAdapter</span></p>
+<p>Lookup adapters from the application
+container.</p>
+<p>Parameters:</p>
+<ul>
+<li><strong>adapterName must be a String.</strong><br/>(Name of the adapter.)</li>
+</ul>
+<p><strong>Returns an Object</strong><br/>(Uninstantiated adapter object.)</p></div></div><div class="code"><div class="wrapper">  _lookupAdapter(adapterName) {
+    assert(<span class="hljs-string">'Could not find integration without a name'</span>, adapterName);
+
+    <span class="hljs-keyword">const</span> owner = getOwner(<span class="hljs-keyword">this</span>);
+    <span class="hljs-keyword">const</span> dasherizedAdapterName = dasherize(adapterName);
+    <span class="hljs-keyword">const</span> localAdapter = owner.lookup(<span class="hljs-string">`ember-cli-analytics@integration:<span class="hljs-subst">${dasherizedAdapterName}</span>`</span>);
+    <span class="hljs-keyword">const</span> adapter = owner.lookup(<span class="hljs-string">`integration:<span class="hljs-subst">${dasherizedAdapterName}</span>`</span>);
+
+    <span class="hljs-keyword">return</span> adapter ? adapter : localAdapter;
+  }
+});</div></div></div></div></body></html>

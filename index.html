@@ -1,0 +1,184 @@
+<!DOCTYPE html><html lang="en"><head><title>index</title></head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content=""><meta name="groc-document-path" content="index"><meta name="groc-project-path" content="README.md"><meta name="groc-github-url" content="https://github.com/tomasbasham/ember-cli-analytics"><link rel="stylesheet" type="text/css" media="all" href="assets/style.css"><script type="text/javascript" src="assets/behavior.js"></script><body><div id="meta"><div class="file-path"><a href="https://github.com/tomasbasham/ember-cli-analytics/blob/master/README.md">README.md</a></div></div><div id="document"><div class="segment"><div class="comments "><div class="wrapper"><h1 id="ember-cli-analytics-build-status-https-travis-ci-org-tomasbasham-ember-cli-analytics-svg-branch-master-https-travis-ci-org-tomasbasham-ember-cli-analytics-">Ember-cli-analytics <a href="https://travis-ci.org/tomasbasham/ember-cli-analytics"><img src="https://travis-ci.org/tomasbasham/ember-cli-analytics.svg?branch=master" alt="Build Status"></a></h1>
+<p>An <a href="http://www.ember-cli.com/">Ember CLI</a> addon to interface with analytic services and external integrations.</p>
+<p>Being able to track what your users are doing provides valuable insights into how your application is performing. However if you are trying to support multiple analytic integrations it can quickly become unmanageable.</p>
+<p>This addon provides a simple <code>analytics</code> service allowing your applications to support multiple analytic integrations without having to clutter your code base with analytic tracking codes. To achieve this, this addon is bundles with a series of adapters requiring you to manage only a single API.</p>
+<p>This addon is built upon the <a href="https://github.com/tomasbasham/ember-cli-adapter-pattern">ember-cli-adpater-pattern</a> allowing you to easily create your own analytic integration adapters.</p>
+<h2 id="installation">Installation</h2>
+<p>From within your Ember CLI project directory run:</p>
+<pre><code>ember install ember-cli-analytics</code></pre>
+<h2 id="usage">Usage</h2>
+<p>This addon implements a service to interface with several front end persistence containers by providing an abstract API that hides the implementation details of each persistence container adapter.</p>
+<h3 id="configuration">Configuration</h3>
+<p>Before the <code>analytics</code> service can be used it first must be configured through <code>config/environment</code>. This allows you to define which of the integrations you want to make available to your application through the <code>analytics</code> service.</p>
+<h5 id="-a-name-configuration-example-a-example-"><a name="configuration-example"></a>Example:</h5>
+<pre><code class="lang-JavaScript"><span class="hljs-comment">// config/environment.js</span>
+<span class="hljs-built_in">module</span>.exports = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">environment</span>) </span>{
+  <span class="hljs-keyword">var</span> ENV = {
+    analytics: {
+      integrations: [
+        {
+          name: <span class="hljs-string">'Bing'</span>,
+          config: {
+            id: <span class="hljs-string">'XXXXXXX'</span>
+          }
+        },
+        {
+          name: <span class="hljs-string">'Facebook'</span>,
+          config: {
+            id: <span class="hljs-string">'XXXXXXXXXXXXXXXX'</span>
+          }
+        },
+        {
+          name: <span class="hljs-string">'GoogleAdwords'</span>,
+          config: {
+            id: <span class="hljs-string">'XXXXXXXXXX'</span>
+          }
+        },
+        {
+          name: <span class="hljs-string">'GoogleAnalytics'</span>,
+          config: {
+            id: <span class="hljs-string">'UA-XXXXXXXX-X'</span>,
+            remarketing: <span class="hljs-literal">true</span>,
+            ecommerce: <span class="hljs-literal">true</span>,
+            enhancedEcommerce: <span class="hljs-literal">false</span>
+          }
+        },
+        {
+          name: <span class="hljs-string">'Mixpanel'</span>,
+          config: {
+            token: <span class="hljs-string">'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'</span>
+          }
+        },
+        {
+          name: <span class="hljs-string">'Optimizely'</span>,
+          config: {
+            id: <span class="hljs-string">'XXXXXXXXXX'</span>
+          }
+        }
+      ]
+    }
+  };
+
+  <span class="hljs-keyword">return</span> ENV;
+};</code></pre>
+<p>This configures your application to use all 6 adapters bundled with this addon.</p>
+<h4 id="integrations">Integrations</h4>
+<p>The integrations array takes a series of objects defining the configuration of each adapter. This is a requirement of <a href="https://github.com/tomasbasham/ember-cli-adapter-pattern">ember-cli-adpater-pattern</a> where each object may take additional key/value pairs. Alongside the name of each adapter, in pascal case, this addon also requires a configuration object typically defining the <code>id</code> or token <code>required</code> to authenticate wit the external service.</p>
+<h3 id="injection">Injection</h3>
+<p>This addon makes no assumptions about what ember objects you want to make the <code>analytics</code> service available. Therefore in order to make the service available you need to implement you own injections.</p>
+<h5 id="-a-name-injection-initializer-example-a-example-"><a name="injection-initializer-example"></a>Example:</h5>
+<pre><code class="lang-JavaScript"><span class="hljs-comment">// app/initializers/analytics.js</span>
+<span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">initialize</span>(<span class="hljs-params">application</span>) </span>{
+  application.inject(<span class="hljs-string">'controller'</span>, <span class="hljs-string">'analytics'</span>, <span class="hljs-string">'service:analytics'</span>);
+  application.inject(<span class="hljs-string">'route'</span>, <span class="hljs-string">'analytics'</span>, <span class="hljs-string">'service:analytics'</span>);
+};
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {
+  name: <span class="hljs-string">'analytics'</span>,
+  initialize: initialize
+};</code></pre>
+<p>This will make the <code>analytics</code> service available to all controllers and routes. It is however unlikely that you will require the service to be injected into every controller or route of your applications. Therefore it is recommended that you include the service on a per object basis.</p>
+<h5 id="-a-name-injection-controller-example-a-example-"><a name="injection-controller-example"></a>Example:</h5>
+<pre><code class="lang-JavaScript"><span class="hljs-comment">// app/controllers/application.js</span>
+<span class="hljs-keyword">import</span> Ember <span class="hljs-keyword">from</span> <span class="hljs-string">'ember'</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> Ember.Controller.extend({
+  analytics: Ember.inject.service()
+});</code></pre>
+<p>This will create a dependency on the application controller and inject the <code>analytics</code> service into this controller only. This can be repeated across all objects that need access to the service.</p>
+<h3 id="analytics-service">Analytics Service</h3>
+<p>The <code>analytics</code> service implements an abstract API that currently supports the following methods:</p>
+<ul>
+<li>trackPage</li>
+<li>trackEvent</li>
+<li>trackConversion</li>
+<li>identify</li>
+<li>alias</li>
+</ul>
+<p>When using this API, by default the service will call the corresponding method on each of the adapters unless a specific adapter is specified. This means that if you were to call <code>trackEvent</code> on the service, it would in turn call <code>trackEvent</code> on each of the adapters that implement it.</p>
+<h5 id="-a-name-all-adapters-example-a-example-"><a name="all-adapters-example"></a>Example:</h5>
+<pre><code class="lang-JavaScript"><span class="hljs-comment">// app/controllers/application.js</span>
+<span class="hljs-keyword">import</span> Ember <span class="hljs-keyword">from</span> <span class="hljs-string">'ember'</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> Ember.Controller.extend({
+  analytics: Ember.inject.service(),
+
+  actions: {
+    playVideo() {
+      <span class="hljs-keyword">const</span> analytics = <span class="hljs-keyword">this</span>.get(<span class="hljs-string">'analytics'</span>);
+      analytics.trackEvent({ action: <span class="hljs-string">'videoPlayed'</span> });
+    }
+  }
+});</code></pre>
+<p>This is great behaviour if you have setup multiple analytic integrations in <code>config/environment</code> and is a consequence of the <a href="https://github.com/tomasbasham/ember-cli-adapter-pattern">ember-cli-adpater-pattern</a>. However if you only want to send events to a single analytic integration you must specify the name.</p>
+<h5 id="-a-name-single-adapter-example-a-example-"><a name="single-adapter-example"></a>Example:</h5>
+<pre><code class="lang-JavaScript"><span class="hljs-comment">// app/controllers/application.js</span>
+<span class="hljs-keyword">import</span> Ember <span class="hljs-keyword">from</span> <span class="hljs-string">'ember'</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> Ember.Controller.extend({
+  analytics: Ember.inject.service(),
+
+  actions: {
+    playVideo() {
+      <span class="hljs-keyword">const</span> analytics = <span class="hljs-keyword">this</span>.get(<span class="hljs-string">'analytics'</span>);
+      analytics.trackEvent(<span class="hljs-string">'Mixpanel'</span>, { action: <span class="hljs-string">'videoPlayed'</span> });
+    }
+  }
+});</code></pre>
+<p>This will only send the event to the <code>Mixpanel</code> adapter.</p>
+<p>Each API call will be wrapped within a promise that resolves with the returned result of the adapter mapped to the adapter name. This means that for any method called on the service where a return value is expected you must use the Promise API to access it.</p>
+<h5 id="-a-name-promise-single-adapter-example-a-example-"><a name="promise-single-adapter-example"></a>Example:</h5>
+<pre><code class="lang-JavaScript"><span class="hljs-comment">// app/controllers/application.js</span>
+<span class="hljs-keyword">import</span> Ember <span class="hljs-keyword">from</span> <span class="hljs-string">'ember'</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> Ember.Controller.extend({
+  analytics: Ember.inject.service(),
+
+  actions: {
+    playVideo() {
+      <span class="hljs-keyword">const</span> analytics = <span class="hljs-keyword">this</span>.get(<span class="hljs-string">'analytics'</span>);
+      analytics.trackEvent(<span class="hljs-string">'Mixpanel'</span>, { action: <span class="hljs-string">'videoPlayed'</span> }).then(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">values</span>) </span>{
+        <span class="hljs-built_in">console</span>.log(values[<span class="hljs-string">'Mixpanel'</span>]); <span class="hljs-comment">// Will print the value returned from the LocalStorage adapter.</span>
+      });
+    }
+  }
+});</code></pre>
+<h3 id="trackable-mixin">Trackable Mixin</h3>
+<p>To track page views this addon provides a <code>trackable</code> mixin. This mixin should be used to augment the ember router and will invoke the <code>trackPage</code> method on each of the configured adapters.</p>
+<h5 id="-a-name-trackable-example-a-example-"><a name="trackable-example"></a>Example:</h5>
+<pre><code class="lang-JavaScript"><span class="hljs-comment">// app/router.js</span>
+<span class="hljs-keyword">import</span> Ember <span class="hljs-keyword">from</span> <span class="hljs-string">'ember'</span>;
+<span class="hljs-keyword">import</span> Trackable <span class="hljs-keyword">from</span> <span class="hljs-string">'ember-cli-analytics/mixins/trackable'</span>;
+<span class="hljs-keyword">import</span> config <span class="hljs-keyword">from</span> <span class="hljs-string">'whichledlight/config/environment'</span>;
+
+<span class="hljs-keyword">const</span> Router = Ember.Router.extend(Trackable, {
+  location: config.locationType
+});
+
+Router.map(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+};
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> Router;</code></pre>
+<h2 id="development">Development</h2>
+<h3 id="installation">Installation</h3>
+<ul>
+<li><code>git clone</code> this repository</li>
+<li><code>npm install</code></li>
+<li><code>bower install</code></li>
+</ul>
+<h3 id="running">Running</h3>
+<ul>
+<li><code>ember server</code></li>
+<li>Visit your app at <a href="http://localhost:4200">http://localhost:4200</a>.</li>
+</ul>
+<h3 id="running-tests">Running Tests</h3>
+<ul>
+<li><code>npm test</code> (Runs <code>ember try:testall</code> to test your addon against multiple Ember versions)</li>
+<li><code>ember test</code></li>
+<li><code>ember test --server</code></li>
+</ul>
+<h3 id="building">Building</h3>
+<ul>
+<li><code>ember build</code></li>
+</ul>
+<p>For more information on using ember-cli, visit <a href="http://www.ember-cli.com/"><a href="http://www.ember-cli.com/">http://www.ember-cli.com/</a></a>.</p></div></div></div></div></body></html>

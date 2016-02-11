@@ -1,0 +1,139 @@
+<!DOCTYPE html><html lang="en"><head><title>integrations/mixpanel</title></head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content="../"><meta name="groc-document-path" content="integrations/mixpanel"><meta name="groc-project-path" content="addon/integrations/mixpanel.js"><meta name="groc-github-url" content="https://github.com/tomasbasham/ember-cli-analytics"><link rel="stylesheet" type="text/css" media="all" href="../assets/style.css"><script type="text/javascript" src="../assets/behavior.js"></script><body><div id="meta"><div class="file-path"><a href="https://github.com/tomasbasham/ember-cli-analytics/blob/master/addon/integrations/mixpanel.js">addon/integrations/mixpanel.js</a></div></div><div id="document"><div class="segment"><div class="code"><div class="wrapper"><span class="hljs-keyword">import</span> Ember <span class="hljs-keyword">from</span> <span class="hljs-string">'ember'</span>;
+<span class="hljs-keyword">import</span> Base <span class="hljs-keyword">from</span> <span class="hljs-string">'ember-cli-analytics/integrations/base'</span>;
+<span class="hljs-keyword">import</span> canUseDOM <span class="hljs-keyword">from</span> <span class="hljs-string">'ember-cli-analytics/utils/can-use-dom'</span>;
+<span class="hljs-keyword">import</span> without <span class="hljs-keyword">from</span> <span class="hljs-string">'ember-cli-analytics/utils/without'</span>;
+
+<span class="hljs-keyword">const</span> {
+  assert,
+  copy,
+  get,
+  isPresent,
+  merge,
+  on
+} = Ember;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> Base.extend({</div></div></div><div class="segment"><div class="comments doc-section"><div class="wrapper"><p><span class='doc-section-header'>Method trackPage</span></p>
+<p>Send the current page URL to
+the analytics engine.</p>
+<p>Parameters:</p>
+<ul>
+<li><strong>options must be an Object.</strong><br/>(Options to send the analytics engine.)</li>
+</ul></div></div><div class="code"><div class="wrapper">  trackPage(options = {}) {
+    <span class="hljs-keyword">const</span> sendEvent = { event: <span class="hljs-string">'pageView'</span> };
+    <span class="hljs-keyword">const</span> event = merge(sendEvent, options);
+
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.trackEvent(event);
+  },</div></div></div><div class="segment"><div class="comments doc-section"><div class="wrapper"><p><span class='doc-section-header'>Method trackEvent</span></p>
+<p>Send an arbitrary event to the
+anlytics engine.</p>
+<p>Parameters:</p>
+<ul>
+<li><strong>options must be an Object.</strong><br/>(Options to send the analytics engine.)</li>
+</ul></div></div><div class="code"><div class="wrapper">  trackEvent(options = {}) {
+    <span class="hljs-keyword">const</span> { event } = options;
+    <span class="hljs-keyword">const</span> properties = without(options, event);
+
+    assert(<span class="hljs-string">'You must pass an event name'</span>, event);
+
+    <span class="hljs-keyword">if</span> (canUseDOM) {
+      <span class="hljs-keyword">if</span> (isPresent(properties)) {
+        <span class="hljs-built_in">window</span>.mixpanel.track(event, properties);
+      } <span class="hljs-keyword">else</span> {
+        <span class="hljs-built_in">window</span>.mixpanel.track(event);
+      }
+    }
+
+    <span class="hljs-keyword">return</span> options;
+  },</div></div></div><div class="segment"><div class="comments doc-section"><div class="wrapper"><p><span class='doc-section-header'>Method trackConversion</span></p>
+<p>Send a conversion completion
+event to the analytics engine.</p>
+<p>Parameters:</p>
+<ul>
+<li><strong>options must be an Object.</strong><br/>(Options to send the analytics engine.)</li>
+</ul></div></div><div class="code"><div class="wrapper">  trackConversion(options = {}) {
+    <span class="hljs-keyword">const</span> { value } = options;
+    <span class="hljs-keyword">const</span> properties = without(options, value);
+
+    assert(<span class="hljs-string">'You must pass a value'</span>, value);
+
+    <span class="hljs-keyword">if</span> (canUseDOM) {
+      <span class="hljs-keyword">if</span> (isPresent(properties)) {
+        <span class="hljs-built_in">window</span>.mixpanel.people.track_charge(value, properties);
+      } <span class="hljs-keyword">else</span> {
+        <span class="hljs-built_in">window</span>.mixpanel.people.track_charge(value);
+      }
+    }
+
+    <span class="hljs-keyword">return</span> options;
+  },</div></div></div><div class="segment"><div class="comments doc-section"><div class="wrapper"><p><span class='doc-section-header'>Method identity</span></p>
+<p>Identify an anonymous user with a
+unique ID. This is useful when a
+user returns to the application
+an we wish to further track them.</p>
+<p>This should not be called in
+conjunction with alias.</p>
+<p>Parameters:</p>
+<ul>
+<li><strong>options must be an Object.</strong><br/>(Options to send the analytics engine.)</li>
+</ul></div></div><div class="code"><div class="wrapper">  identify(options = {}) {
+    <span class="hljs-keyword">const</span> { id } = options;
+    <span class="hljs-keyword">const</span> properties = without(options, id);
+
+    assert(<span class="hljs-string">'You must pass a distinct id'</span>, id);
+
+    <span class="hljs-keyword">if</span> (canUseDOM) {
+      <span class="hljs-keyword">if</span> (isPresent(properties)) {
+        <span class="hljs-built_in">window</span>.mixpanel.identify(id, properties);
+      } <span class="hljs-keyword">else</span> {
+        <span class="hljs-built_in">window</span>.mixpanel.identify(id);
+      }
+    }
+
+    <span class="hljs-keyword">return</span> options;
+  },</div></div></div><div class="segment"><div class="comments doc-section"><div class="wrapper"><p><span class='doc-section-header'>Method alias</span></p>
+<p>For those platforms that support
+it, map an anonymous user id to a
+registered user. This is useful
+when you wish to associate events
+made before the user registerd
+with a newly created user account.</p>
+<p>Parameters:</p>
+<ul>
+<li><strong>options must be an Object.</strong><br/>(Options to send the analytics engine.)</li>
+</ul></div></div><div class="code"><div class="wrapper">  alias(options = {}) {
+    <span class="hljs-keyword">const</span> { alias, original } = options;
+
+    assert(<span class="hljs-string">'You must pass an alias'</span>, alias);
+
+    <span class="hljs-keyword">if</span> (canUseDOM) {
+      <span class="hljs-keyword">if</span> (isPresent(original)) {
+        <span class="hljs-built_in">window</span>.mixpanel.alias(alias, original);
+      } <span class="hljs-keyword">else</span> {
+        <span class="hljs-built_in">window</span>.mixpanel.alias(alias);
+      }
+    }
+
+    <span class="hljs-keyword">return</span> options;
+  },</div></div></div><div class="segment"><div class="comments doc-section"><div class="wrapper"><p><span class='doc-section-header'>Method insertTag on init</span></p>
+<p>Insert the JavaScript tag into the
+page, and perform any necessary
+setup.</p></div></div><div class="code"><div class="wrapper">  insertTag: on(<span class="hljs-string">'init'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">const</span> config = copy(get(<span class="hljs-keyword">this</span>, <span class="hljs-string">'config'</span>));
+    <span class="hljs-keyword">const</span> { token } = config;
+
+    assert(<span class="hljs-string">'You must pass a valid `token` to the Mixpanel adapter'</span>, token);
+
+    <span class="hljs-keyword">if</span> (canUseDOM) {</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>jshint ignore:start </p></div></div><div class="code"><div class="wrapper">      <span class="hljs-keyword">const</span> regex = <span class="hljs-regexp">/^\/\//</span>;
+      (<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">e,b</span>)</span>{<span class="hljs-keyword">if</span>(!b.__SV){<span class="hljs-keyword">var</span> a,f,i,g;<span class="hljs-built_in">window</span>.mixpanel=b;b._i=[];b.init=<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">a,e,d</span>)</span>{<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">f</span>(<span class="hljs-params">b,h</span>)</span>{<span class="hljs-keyword">var</span> a=h.split(<span class="hljs-string">"."</span>);<span class="hljs-number">2</span>==a.length&amp;&amp;(b=b[a[<span class="hljs-number">0</span>]],h=a[<span class="hljs-number">1</span>]);b[h]=<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{b.push([h].concat(<span class="hljs-built_in">Array</span>.prototype.slice.call(<span class="hljs-built_in">arguments</span>,<span class="hljs-number">0</span>)))}}<span class="hljs-keyword">var</span> c=b;<span class="hljs-string">"undefined"</span>!==<span class="hljs-keyword">typeof</span> d?c=b[d]=[]:d=<span class="hljs-string">"mixpanel"</span>;c.people=c.people||[];c.toString=<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">b</span>)</span>{<span class="hljs-keyword">var</span> a=<span class="hljs-string">"mixpanel"</span>;<span class="hljs-string">"mixpanel"</span>!==d&amp;&amp;(a+=<span class="hljs-string">"."</span>+d);b||(a+=<span class="hljs-string">" (stub)"</span>);<span class="hljs-keyword">return</span> a};c.people.toString=<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{<span class="hljs-keyword">return</span> c.toString(<span class="hljs-number">1</span>)+<span class="hljs-string">".people (stub)"</span>};i=<span class="hljs-string">"disable time_event track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.union people.track_charge people.clear_charges people.delete_user"</span>.split(<span class="hljs-string">" "</span>);
+      <span class="hljs-keyword">for</span>(g=<span class="hljs-number">0</span>;g&lt;i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=<span class="hljs-number">1.2</span>;a=e.createElement(<span class="hljs-string">'script'</span>);a.type=<span class="hljs-string">'text/javascript'</span>;a.async=!<span class="hljs-number">0</span>;a.src=<span class="hljs-string">'undefined'</span>!==<span class="hljs-keyword">typeof</span> MIXPANEL_CUSTOM_LIB_URL?MIXPANEL_CUSTOM_LIB_URL:<span class="hljs-string">'file:'</span>===e.location.protocol&amp;&amp;<span class="hljs-string">'//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js'</span>.match(regex)?<span class="hljs-string">'https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js'</span>:<span class="hljs-string">'//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js'</span>;f=e.getElementsByTagName(<span class="hljs-string">'script'</span>)[<span class="hljs-number">0</span>];f.parentNode.insertBefore(a,f)}})(<span class="hljs-built_in">document</span>,<span class="hljs-built_in">window</span>.mixpanel||[]);
+      mixpanel.init(token);</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>jshint ignore:end </p></div></div><div class="code"><div class="wrapper">    }
+  }),</div></div></div><div class="segment"><div class="comments doc-section"><div class="wrapper"><p><span class='doc-section-header'>Method removeTag on willDestroy</span></p>
+<p>Remove the JavaScript tag from the
+page, and perform any necessary
+teardown.</p></div></div><div class="code"><div class="wrapper">  removeTag: on(<span class="hljs-string">'willDestroy'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">if</span> (canUseDOM) {
+      Ember.$(<span class="hljs-string">'script[src*="mxpnl"]'</span>).remove();
+      <span class="hljs-keyword">delete</span> <span class="hljs-built_in">window</span>.mixpanel;
+    }
+  })
+});</div></div></div></div></body></html>
