@@ -13,7 +13,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
           "commentsOnly": true,
           "name": "Markdown"
         },
-        "sourcePath": "/Users/tbm/Projects/Programming/Projects/JavaScript/ember-cli-analytics/README.md",
+        "sourcePath": "/Users/tbm/Projects/Programming/Projects/JavaScript/ember-cli-addons/ember-cli-analytics/README.md",
         "projectPath": "README.md",
         "targetPath": "index",
         "pageTitle": "index",
@@ -156,7 +156,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                   "foldPrefix": "^",
                   "name": "JavaScript"
                 },
-                "sourcePath": "/Users/tbm/Projects/Programming/Projects/JavaScript/ember-cli-analytics/app/integrations/base.js",
+                "sourcePath": "/Users/tbm/Projects/Programming/Projects/JavaScript/ember-cli-addons/ember-cli-analytics/app/integrations/base.js",
                 "projectPath": "app/integrations/base.js",
                 "targetPath": "app/integrations/base",
                 "pageTitle": "app/integrations/base",
@@ -176,7 +176,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                   "foldPrefix": "^",
                   "name": "JavaScript"
                 },
-                "sourcePath": "/Users/tbm/Projects/Programming/Projects/JavaScript/ember-cli-analytics/app/integrations/bing.js",
+                "sourcePath": "/Users/tbm/Projects/Programming/Projects/JavaScript/ember-cli-addons/ember-cli-analytics/app/integrations/bing.js",
                 "projectPath": "app/integrations/bing.js",
                 "targetPath": "app/integrations/bing",
                 "pageTitle": "app/integrations/bing",
@@ -196,7 +196,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                   "foldPrefix": "^",
                   "name": "JavaScript"
                 },
-                "sourcePath": "/Users/tbm/Projects/Programming/Projects/JavaScript/ember-cli-analytics/app/integrations/facebook.js",
+                "sourcePath": "/Users/tbm/Projects/Programming/Projects/JavaScript/ember-cli-addons/ember-cli-analytics/app/integrations/facebook.js",
                 "projectPath": "app/integrations/facebook.js",
                 "targetPath": "app/integrations/facebook",
                 "pageTitle": "app/integrations/facebook",
@@ -216,7 +216,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                   "foldPrefix": "^",
                   "name": "JavaScript"
                 },
-                "sourcePath": "/Users/tbm/Projects/Programming/Projects/JavaScript/ember-cli-analytics/app/integrations/google-adwords.js",
+                "sourcePath": "/Users/tbm/Projects/Programming/Projects/JavaScript/ember-cli-addons/ember-cli-analytics/app/integrations/google-adwords.js",
                 "projectPath": "app/integrations/google-adwords.js",
                 "targetPath": "app/integrations/google-adwords",
                 "pageTitle": "app/integrations/google-adwords",
@@ -236,7 +236,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                   "foldPrefix": "^",
                   "name": "JavaScript"
                 },
-                "sourcePath": "/Users/tbm/Projects/Programming/Projects/JavaScript/ember-cli-analytics/app/integrations/google-analytics.js",
+                "sourcePath": "/Users/tbm/Projects/Programming/Projects/JavaScript/ember-cli-addons/ember-cli-analytics/app/integrations/google-analytics.js",
                 "projectPath": "app/integrations/google-analytics.js",
                 "targetPath": "app/integrations/google-analytics",
                 "pageTitle": "app/integrations/google-analytics",
@@ -256,7 +256,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                   "foldPrefix": "^",
                   "name": "JavaScript"
                 },
-                "sourcePath": "/Users/tbm/Projects/Programming/Projects/JavaScript/ember-cli-analytics/app/integrations/mixpanel.js",
+                "sourcePath": "/Users/tbm/Projects/Programming/Projects/JavaScript/ember-cli-addons/ember-cli-analytics/app/integrations/mixpanel.js",
                 "projectPath": "app/integrations/mixpanel.js",
                 "targetPath": "app/integrations/mixpanel",
                 "pageTitle": "app/integrations/mixpanel",
@@ -276,7 +276,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                   "foldPrefix": "^",
                   "name": "JavaScript"
                 },
-                "sourcePath": "/Users/tbm/Projects/Programming/Projects/JavaScript/ember-cli-analytics/app/integrations/optimizely.js",
+                "sourcePath": "/Users/tbm/Projects/Programming/Projects/JavaScript/ember-cli-addons/ember-cli-analytics/app/integrations/optimizely.js",
                 "projectPath": "app/integrations/optimizely.js",
                 "targetPath": "app/integrations/optimizely",
                 "pageTitle": "app/integrations/optimizely",
@@ -306,7 +306,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                   "foldPrefix": "^",
                   "name": "JavaScript"
                 },
-                "sourcePath": "/Users/tbm/Projects/Programming/Projects/JavaScript/ember-cli-analytics/app/services/analytics.js",
+                "sourcePath": "/Users/tbm/Projects/Programming/Projects/JavaScript/ember-cli-addons/ember-cli-analytics/app/services/analytics.js",
                 "projectPath": "app/services/analytics.js",
                 "targetPath": "app/services/analytics",
                 "pageTitle": "app/services/analytics",
@@ -336,7 +336,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                   "foldPrefix": "^",
                   "name": "JavaScript"
                 },
-                "sourcePath": "/Users/tbm/Projects/Programming/Projects/JavaScript/ember-cli-analytics/app/utils/can-use-dom.js",
+                "sourcePath": "/Users/tbm/Projects/Programming/Projects/JavaScript/ember-cli-addons/ember-cli-analytics/app/utils/can-use-dom.js",
                 "projectPath": "app/utils/can-use-dom.js",
                 "targetPath": "app/utils/can-use-dom",
                 "pageTitle": "app/utils/can-use-dom",
@@ -356,7 +356,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                   "foldPrefix": "^",
                   "name": "JavaScript"
                 },
-                "sourcePath": "/Users/tbm/Projects/Programming/Projects/JavaScript/ember-cli-analytics/app/utils/without.js",
+                "sourcePath": "/Users/tbm/Projects/Programming/Projects/JavaScript/ember-cli-addons/ember-cli-analytics/app/utils/without.js",
                 "projectPath": "app/utils/without.js",
                 "targetPath": "app/utils/without",
                 "pageTitle": "app/utils/without",
@@ -388,7 +388,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
               "foldPrefix": "^",
               "name": "JavaScript"
             },
-            "sourcePath": "/Users/tbm/Projects/Programming/Projects/JavaScript/ember-cli-analytics/addon/integrations/base.js",
+            "sourcePath": "/Users/tbm/Projects/Programming/Projects/JavaScript/ember-cli-addons/ember-cli-analytics/addon/integrations/base.js",
             "projectPath": "addon/integrations/base.js",
             "targetPath": "integrations/base",
             "pageTitle": "integrations/base",
@@ -408,7 +408,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
               "foldPrefix": "^",
               "name": "JavaScript"
             },
-            "sourcePath": "/Users/tbm/Projects/Programming/Projects/JavaScript/ember-cli-analytics/addon/integrations/bing.js",
+            "sourcePath": "/Users/tbm/Projects/Programming/Projects/JavaScript/ember-cli-addons/ember-cli-analytics/addon/integrations/bing.js",
             "projectPath": "addon/integrations/bing.js",
             "targetPath": "integrations/bing",
             "pageTitle": "integrations/bing",
@@ -428,7 +428,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
               "foldPrefix": "^",
               "name": "JavaScript"
             },
-            "sourcePath": "/Users/tbm/Projects/Programming/Projects/JavaScript/ember-cli-analytics/addon/integrations/facebook.js",
+            "sourcePath": "/Users/tbm/Projects/Programming/Projects/JavaScript/ember-cli-addons/ember-cli-analytics/addon/integrations/facebook.js",
             "projectPath": "addon/integrations/facebook.js",
             "targetPath": "integrations/facebook",
             "pageTitle": "integrations/facebook",
@@ -448,7 +448,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
               "foldPrefix": "^",
               "name": "JavaScript"
             },
-            "sourcePath": "/Users/tbm/Projects/Programming/Projects/JavaScript/ember-cli-analytics/addon/integrations/google-adwords.js",
+            "sourcePath": "/Users/tbm/Projects/Programming/Projects/JavaScript/ember-cli-addons/ember-cli-analytics/addon/integrations/google-adwords.js",
             "projectPath": "addon/integrations/google-adwords.js",
             "targetPath": "integrations/google-adwords",
             "pageTitle": "integrations/google-adwords",
@@ -468,7 +468,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
               "foldPrefix": "^",
               "name": "JavaScript"
             },
-            "sourcePath": "/Users/tbm/Projects/Programming/Projects/JavaScript/ember-cli-analytics/addon/integrations/google-analytics.js",
+            "sourcePath": "/Users/tbm/Projects/Programming/Projects/JavaScript/ember-cli-addons/ember-cli-analytics/addon/integrations/google-analytics.js",
             "projectPath": "addon/integrations/google-analytics.js",
             "targetPath": "integrations/google-analytics",
             "pageTitle": "integrations/google-analytics",
@@ -488,7 +488,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
               "foldPrefix": "^",
               "name": "JavaScript"
             },
-            "sourcePath": "/Users/tbm/Projects/Programming/Projects/JavaScript/ember-cli-analytics/addon/integrations/mixpanel.js",
+            "sourcePath": "/Users/tbm/Projects/Programming/Projects/JavaScript/ember-cli-addons/ember-cli-analytics/addon/integrations/mixpanel.js",
             "projectPath": "addon/integrations/mixpanel.js",
             "targetPath": "integrations/mixpanel",
             "pageTitle": "integrations/mixpanel",
@@ -508,7 +508,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
               "foldPrefix": "^",
               "name": "JavaScript"
             },
-            "sourcePath": "/Users/tbm/Projects/Programming/Projects/JavaScript/ember-cli-analytics/addon/integrations/optimizely.js",
+            "sourcePath": "/Users/tbm/Projects/Programming/Projects/JavaScript/ember-cli-addons/ember-cli-analytics/addon/integrations/optimizely.js",
             "projectPath": "addon/integrations/optimizely.js",
             "targetPath": "integrations/optimizely",
             "pageTitle": "integrations/optimizely",
@@ -538,7 +538,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
               "foldPrefix": "^",
               "name": "JavaScript"
             },
-            "sourcePath": "/Users/tbm/Projects/Programming/Projects/JavaScript/ember-cli-analytics/addon/mixins/trackable.js",
+            "sourcePath": "/Users/tbm/Projects/Programming/Projects/JavaScript/ember-cli-addons/ember-cli-analytics/addon/mixins/trackable.js",
             "projectPath": "addon/mixins/trackable.js",
             "targetPath": "mixins/trackable",
             "pageTitle": "mixins/trackable",
@@ -568,7 +568,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
               "foldPrefix": "^",
               "name": "JavaScript"
             },
-            "sourcePath": "/Users/tbm/Projects/Programming/Projects/JavaScript/ember-cli-analytics/addon/services/analytics.js",
+            "sourcePath": "/Users/tbm/Projects/Programming/Projects/JavaScript/ember-cli-addons/ember-cli-analytics/addon/services/analytics.js",
             "projectPath": "addon/services/analytics.js",
             "targetPath": "services/analytics",
             "pageTitle": "services/analytics",
@@ -598,7 +598,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
               "foldPrefix": "^",
               "name": "JavaScript"
             },
-            "sourcePath": "/Users/tbm/Projects/Programming/Projects/JavaScript/ember-cli-analytics/addon/utils/can-use-dom.js",
+            "sourcePath": "/Users/tbm/Projects/Programming/Projects/JavaScript/ember-cli-addons/ember-cli-analytics/addon/utils/can-use-dom.js",
             "projectPath": "addon/utils/can-use-dom.js",
             "targetPath": "utils/can-use-dom",
             "pageTitle": "utils/can-use-dom",
@@ -618,7 +618,7 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
               "foldPrefix": "^",
               "name": "JavaScript"
             },
-            "sourcePath": "/Users/tbm/Projects/Programming/Projects/JavaScript/ember-cli-analytics/addon/utils/without.js",
+            "sourcePath": "/Users/tbm/Projects/Programming/Projects/JavaScript/ember-cli-addons/ember-cli-analytics/addon/utils/without.js",
             "projectPath": "addon/utils/without.js",
             "targetPath": "utils/without",
             "pageTitle": "utils/without",

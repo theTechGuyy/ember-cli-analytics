@@ -17,6 +17,27 @@ the analytics engine.</p></div></div><div class="code"><div class="wrapper">  tr
     <span class="hljs-keyword">if</span> (canUseDOM) {
       <span class="hljs-built_in">window</span>.fbq(<span class="hljs-string">'track'</span>, <span class="hljs-string">'PageView'</span>);
     }
+  },</div></div></div><div class="segment"><div class="comments doc-section"><div class="wrapper"><p><span class='doc-section-header'>Method trackEvent</span></p>
+<p>Send an arbitrary event to the
+anlytics engine.</p>
+<p>Parameters:</p>
+<ul>
+<li><strong>options must be an Object.</strong><br/>(Options to send the analytics engine.)</li>
+</ul></div></div><div class="code"><div class="wrapper">  trackEvent(options = {}) {
+    <span class="hljs-keyword">const</span> { event } = options;
+    <span class="hljs-keyword">const</span> properties = without(options, event);
+
+    assert(<span class="hljs-string">'You must pass an event name'</span>, event);
+
+    <span class="hljs-keyword">if</span> (canUseDOM) {
+      <span class="hljs-keyword">if</span> (isPresent(properties)) {
+        <span class="hljs-built_in">window</span>.fbq(<span class="hljs-string">'track'</span>, event, properties);
+      } <span class="hljs-keyword">else</span> {
+        <span class="hljs-built_in">window</span>.fbq(<span class="hljs-string">'track'</span>, event);
+      }
+    }
+
+    <span class="hljs-keyword">return</span> options;
   },</div></div></div><div class="segment"><div class="comments doc-section"><div class="wrapper"><p><span class='doc-section-header'>Method trackConversion</span></p>
 <p>Send a conversion completion
 event to the analytics engine.</p>
