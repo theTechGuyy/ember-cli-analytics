@@ -45,8 +45,13 @@ export default Base.extend({
       googleAdwordsEvent['google_conversion_value'] = value;
     }
 
-    if (canUseDOM) {
-      window['google_trackConversion'](googleAdwordsEvent);
+    if (typeof(conv_handler) === 'function' && canUseDOM) {
+      try {
+        window['google_trackConversion'](googleAdwordsEvent);
+      }
+      catch (err) {
+        console.log(err);
+      }
     }
   },
 
