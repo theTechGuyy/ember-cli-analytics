@@ -42,7 +42,7 @@
     "ember-addon"
   ],
   "dependencies": {
-    "ember-cli-adapter-pattern": "^1.0.0",
+    "ember-cli-adapter-pattern": "1.2.0",
     "ember-cli-babel": "^5.1.5",
     "ember-getowner-polyfill": "1.0.0"
   },
